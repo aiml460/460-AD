@@ -1,0 +1,1249 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "2c8d9063-e6b2-4a49-9707-af7dd309c91f",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "     Pregnancies  Glucose  BloodPressure  SkinThickness  Insulin   BMI  \\\n",
+      "0              6      148             72             35        0  33.6   \n",
+      "1              1       85             66             29        0  26.6   \n",
+      "2              8      183             64              0        0  23.3   \n",
+      "3              1       89             66             23       94  28.1   \n",
+      "4              0      137             40             35      168  43.1   \n",
+      "..           ...      ...            ...            ...      ...   ...   \n",
+      "763           10      101             76             48      180  32.9   \n",
+      "764            2      122             70             27        0  36.8   \n",
+      "765            5      121             72             23      112  26.2   \n",
+      "766            1      126             60              0        0  30.1   \n",
+      "767            1       93             70             31        0  30.4   \n",
+      "\n",
+      "     DiabetesPedigreeFunction  Age  Outcome  \n",
+      "0                       0.627   50        1  \n",
+      "1                       0.351   31        0  \n",
+      "2                       0.672   32        1  \n",
+      "3                       0.167   21        0  \n",
+      "4                       2.288   33        1  \n",
+      "..                        ...  ...      ...  \n",
+      "763                     0.171   63        0  \n",
+      "764                     0.340   27        0  \n",
+      "765                     0.245   30        0  \n",
+      "766                     0.349   47        1  \n",
+      "767                     0.315   23        0  \n",
+      "\n",
+      "[768 rows x 9 columns]\n"
+     ]
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "df=pd.read_csv(r\"C:\\Users\\samaa\\Downloads\\diabetes.csv\")\n",
+    "print(df)             \n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "cc5fa8e8-7173-4aa3-8b15-fe12d8f190fe",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Pregnancies</th>\n",
+       "      <th>Glucose</th>\n",
+       "      <th>BloodPressure</th>\n",
+       "      <th>SkinThickness</th>\n",
+       "      <th>Insulin</th>\n",
+       "      <th>BMI</th>\n",
+       "      <th>DiabetesPedigreeFunction</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>Outcome</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>6</td>\n",
+       "      <td>148</td>\n",
+       "      <td>72</td>\n",
+       "      <td>35</td>\n",
+       "      <td>0</td>\n",
+       "      <td>33.6</td>\n",
+       "      <td>0.627</td>\n",
+       "      <td>50</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>1</td>\n",
+       "      <td>85</td>\n",
+       "      <td>66</td>\n",
+       "      <td>29</td>\n",
+       "      <td>0</td>\n",
+       "      <td>26.6</td>\n",
+       "      <td>0.351</td>\n",
+       "      <td>31</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>8</td>\n",
+       "      <td>183</td>\n",
+       "      <td>64</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>23.3</td>\n",
+       "      <td>0.672</td>\n",
+       "      <td>32</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>1</td>\n",
+       "      <td>89</td>\n",
+       "      <td>66</td>\n",
+       "      <td>23</td>\n",
+       "      <td>94</td>\n",
+       "      <td>28.1</td>\n",
+       "      <td>0.167</td>\n",
+       "      <td>21</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>0</td>\n",
+       "      <td>137</td>\n",
+       "      <td>40</td>\n",
+       "      <td>35</td>\n",
+       "      <td>168</td>\n",
+       "      <td>43.1</td>\n",
+       "      <td>2.288</td>\n",
+       "      <td>33</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   Pregnancies  Glucose  BloodPressure  SkinThickness  Insulin   BMI  \\\n",
+       "0            6      148             72             35        0  33.6   \n",
+       "1            1       85             66             29        0  26.6   \n",
+       "2            8      183             64              0        0  23.3   \n",
+       "3            1       89             66             23       94  28.1   \n",
+       "4            0      137             40             35      168  43.1   \n",
+       "\n",
+       "   DiabetesPedigreeFunction  Age  Outcome  \n",
+       "0                     0.627   50        1  \n",
+       "1                     0.351   31        0  \n",
+       "2                     0.672   32        1  \n",
+       "3                     0.167   21        0  \n",
+       "4                     2.288   33        1  "
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "39120b93-0ff9-4378-bfb2-c094839c12ad",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Pregnancies</th>\n",
+       "      <th>Glucose</th>\n",
+       "      <th>BloodPressure</th>\n",
+       "      <th>SkinThickness</th>\n",
+       "      <th>Insulin</th>\n",
+       "      <th>BMI</th>\n",
+       "      <th>DiabetesPedigreeFunction</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>Outcome</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>763</th>\n",
+       "      <td>10</td>\n",
+       "      <td>101</td>\n",
+       "      <td>76</td>\n",
+       "      <td>48</td>\n",
+       "      <td>180</td>\n",
+       "      <td>32.9</td>\n",
+       "      <td>0.171</td>\n",
+       "      <td>63</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>764</th>\n",
+       "      <td>2</td>\n",
+       "      <td>122</td>\n",
+       "      <td>70</td>\n",
+       "      <td>27</td>\n",
+       "      <td>0</td>\n",
+       "      <td>36.8</td>\n",
+       "      <td>0.340</td>\n",
+       "      <td>27</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>765</th>\n",
+       "      <td>5</td>\n",
+       "      <td>121</td>\n",
+       "      <td>72</td>\n",
+       "      <td>23</td>\n",
+       "      <td>112</td>\n",
+       "      <td>26.2</td>\n",
+       "      <td>0.245</td>\n",
+       "      <td>30</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>766</th>\n",
+       "      <td>1</td>\n",
+       "      <td>126</td>\n",
+       "      <td>60</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>30.1</td>\n",
+       "      <td>0.349</td>\n",
+       "      <td>47</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>767</th>\n",
+       "      <td>1</td>\n",
+       "      <td>93</td>\n",
+       "      <td>70</td>\n",
+       "      <td>31</td>\n",
+       "      <td>0</td>\n",
+       "      <td>30.4</td>\n",
+       "      <td>0.315</td>\n",
+       "      <td>23</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "     Pregnancies  Glucose  BloodPressure  SkinThickness  Insulin   BMI  \\\n",
+       "763           10      101             76             48      180  32.9   \n",
+       "764            2      122             70             27        0  36.8   \n",
+       "765            5      121             72             23      112  26.2   \n",
+       "766            1      126             60              0        0  30.1   \n",
+       "767            1       93             70             31        0  30.4   \n",
+       "\n",
+       "     DiabetesPedigreeFunction  Age  Outcome  \n",
+       "763                     0.171   63        0  \n",
+       "764                     0.340   27        0  \n",
+       "765                     0.245   30        0  \n",
+       "766                     0.349   47        1  \n",
+       "767                     0.315   23        0  "
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.tail()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "c392e91f-2eff-45ad-aae5-a8482c8ee3c2",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Pregnancies</th>\n",
+       "      <th>Glucose</th>\n",
+       "      <th>BloodPressure</th>\n",
+       "      <th>SkinThickness</th>\n",
+       "      <th>Insulin</th>\n",
+       "      <th>BMI</th>\n",
+       "      <th>DiabetesPedigreeFunction</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>Outcome</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>6</td>\n",
+       "      <td>148</td>\n",
+       "      <td>72</td>\n",
+       "      <td>35</td>\n",
+       "      <td>0</td>\n",
+       "      <td>33.6</td>\n",
+       "      <td>0.627</td>\n",
+       "      <td>50</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>1</td>\n",
+       "      <td>85</td>\n",
+       "      <td>66</td>\n",
+       "      <td>29</td>\n",
+       "      <td>0</td>\n",
+       "      <td>26.6</td>\n",
+       "      <td>0.351</td>\n",
+       "      <td>31</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>8</td>\n",
+       "      <td>183</td>\n",
+       "      <td>64</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>23.3</td>\n",
+       "      <td>0.672</td>\n",
+       "      <td>32</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>1</td>\n",
+       "      <td>89</td>\n",
+       "      <td>66</td>\n",
+       "      <td>23</td>\n",
+       "      <td>94</td>\n",
+       "      <td>28.1</td>\n",
+       "      <td>0.167</td>\n",
+       "      <td>21</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>0</td>\n",
+       "      <td>137</td>\n",
+       "      <td>40</td>\n",
+       "      <td>35</td>\n",
+       "      <td>168</td>\n",
+       "      <td>43.1</td>\n",
+       "      <td>2.288</td>\n",
+       "      <td>33</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>5</td>\n",
+       "      <td>116</td>\n",
+       "      <td>74</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>25.6</td>\n",
+       "      <td>0.201</td>\n",
+       "      <td>30</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>3</td>\n",
+       "      <td>78</td>\n",
+       "      <td>50</td>\n",
+       "      <td>32</td>\n",
+       "      <td>88</td>\n",
+       "      <td>31.0</td>\n",
+       "      <td>0.248</td>\n",
+       "      <td>26</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7</th>\n",
+       "      <td>10</td>\n",
+       "      <td>115</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>35.3</td>\n",
+       "      <td>0.134</td>\n",
+       "      <td>29</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>2</td>\n",
+       "      <td>197</td>\n",
+       "      <td>70</td>\n",
+       "      <td>45</td>\n",
+       "      <td>543</td>\n",
+       "      <td>30.5</td>\n",
+       "      <td>0.158</td>\n",
+       "      <td>53</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>9</th>\n",
+       "      <td>8</td>\n",
+       "      <td>125</td>\n",
+       "      <td>96</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.232</td>\n",
+       "      <td>54</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   Pregnancies  Glucose  BloodPressure  SkinThickness  Insulin   BMI  \\\n",
+       "0            6      148             72             35        0  33.6   \n",
+       "1            1       85             66             29        0  26.6   \n",
+       "2            8      183             64              0        0  23.3   \n",
+       "3            1       89             66             23       94  28.1   \n",
+       "4            0      137             40             35      168  43.1   \n",
+       "5            5      116             74              0        0  25.6   \n",
+       "6            3       78             50             32       88  31.0   \n",
+       "7           10      115              0              0        0  35.3   \n",
+       "8            2      197             70             45      543  30.5   \n",
+       "9            8      125             96              0        0   0.0   \n",
+       "\n",
+       "   DiabetesPedigreeFunction  Age  Outcome  \n",
+       "0                     0.627   50        1  \n",
+       "1                     0.351   31        0  \n",
+       "2                     0.672   32        1  \n",
+       "3                     0.167   21        0  \n",
+       "4                     2.288   33        1  \n",
+       "5                     0.201   30        0  \n",
+       "6                     0.248   26        1  \n",
+       "7                     0.134   29        0  \n",
+       "8                     0.158   53        1  \n",
+       "9                     0.232   54        1  "
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.head(10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "211f4244-5414-4aa0-9246-09bf1a1ed12f",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Pregnancies</th>\n",
+       "      <th>Glucose</th>\n",
+       "      <th>BloodPressure</th>\n",
+       "      <th>SkinThickness</th>\n",
+       "      <th>Insulin</th>\n",
+       "      <th>BMI</th>\n",
+       "      <th>DiabetesPedigreeFunction</th>\n",
+       "      <th>Age</th>\n",
+       "      <th>Outcome</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>763</th>\n",
+       "      <td>10</td>\n",
+       "      <td>101</td>\n",
+       "      <td>76</td>\n",
+       "      <td>48</td>\n",
+       "      <td>180</td>\n",
+       "      <td>32.9</td>\n",
+       "      <td>0.171</td>\n",
+       "      <td>63</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>764</th>\n",
+       "      <td>2</td>\n",
+       "      <td>122</td>\n",
+       "      <td>70</td>\n",
+       "      <td>27</td>\n",
+       "      <td>0</td>\n",
+       "      <td>36.8</td>\n",
+       "      <td>0.340</td>\n",
+       "      <td>27</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>765</th>\n",
+       "      <td>5</td>\n",
+       "      <td>121</td>\n",
+       "      <td>72</td>\n",
+       "      <td>23</td>\n",
+       "      <td>112</td>\n",
+       "      <td>26.2</td>\n",
+       "      <td>0.245</td>\n",
+       "      <td>30</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>766</th>\n",
+       "      <td>1</td>\n",
+       "      <td>126</td>\n",
+       "      <td>60</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>30.1</td>\n",
+       "      <td>0.349</td>\n",
+       "      <td>47</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>767</th>\n",
+       "      <td>1</td>\n",
+       "      <td>93</td>\n",
+       "      <td>70</td>\n",
+       "      <td>31</td>\n",
+       "      <td>0</td>\n",
+       "      <td>30.4</td>\n",
+       "      <td>0.315</td>\n",
+       "      <td>23</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "     Pregnancies  Glucose  BloodPressure  SkinThickness  Insulin   BMI  \\\n",
+       "763           10      101             76             48      180  32.9   \n",
+       "764            2      122             70             27        0  36.8   \n",
+       "765            5      121             72             23      112  26.2   \n",
+       "766            1      126             60              0        0  30.1   \n",
+       "767            1       93             70             31        0  30.4   \n",
+       "\n",
+       "     DiabetesPedigreeFunction  Age  Outcome  \n",
+       "763                     0.171   63        0  \n",
+       "764                     0.340   27        0  \n",
+       "765                     0.245   30        0  \n",
+       "766                     0.349   47        1  \n",
+       "767                     0.315   23        0  "
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.tail(5)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "c8dc979b-a8c7-4145-987a-18bd5611dd83",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "    YearsExperience    Salary\n",
+      "0               1.1   39343.0\n",
+      "1               1.3   46205.0\n",
+      "2               1.5   37731.0\n",
+      "3               2.0   43525.0\n",
+      "4               2.2   39891.0\n",
+      "5               2.9   56642.0\n",
+      "6               3.0   60150.0\n",
+      "7               3.2   54445.0\n",
+      "8               3.2   64445.0\n",
+      "9               3.7   57189.0\n",
+      "10              3.9   63218.0\n",
+      "11              4.0   55794.0\n",
+      "12              4.0   56957.0\n",
+      "13              4.1   57081.0\n",
+      "14              4.5   61111.0\n",
+      "15              4.9   67938.0\n",
+      "16              5.1   66029.0\n",
+      "17              5.3   83088.0\n",
+      "18              5.9   81363.0\n",
+      "19              6.0   93940.0\n",
+      "20              6.8   91738.0\n",
+      "21              7.1   98273.0\n",
+      "22              7.9  101302.0\n",
+      "23              8.2  113812.0\n",
+      "24              8.7  109431.0\n",
+      "25              9.0  105582.0\n",
+      "26              9.5  116969.0\n",
+      "27              9.6  112635.0\n",
+      "28             10.3  122391.0\n",
+      "29             10.5  121872.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "df=pd.read_csv(r\"C:\\Users\\samaa\\Downloads\\Salary_Data.csv\")\n",
+    "print(df)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "b671d64b-aa69-4563-b846-4ef9d51d0f3b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>YearsExperience</th>\n",
+       "      <th>Salary</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>1.1</td>\n",
+       "      <td>39343.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>1.3</td>\n",
+       "      <td>46205.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>1.5</td>\n",
+       "      <td>37731.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>2.0</td>\n",
+       "      <td>43525.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>2.2</td>\n",
+       "      <td>39891.0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   YearsExperience   Salary\n",
+       "0              1.1  39343.0\n",
+       "1              1.3  46205.0\n",
+       "2              1.5  37731.0\n",
+       "3              2.0  43525.0\n",
+       "4              2.2  39891.0"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "38253c9e-0141-4ca8-8f08-e6bbfbe63c79",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>YearsExperience</th>\n",
+       "      <th>Salary</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>25</th>\n",
+       "      <td>9.0</td>\n",
+       "      <td>105582.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>26</th>\n",
+       "      <td>9.5</td>\n",
+       "      <td>116969.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>27</th>\n",
+       "      <td>9.6</td>\n",
+       "      <td>112635.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>28</th>\n",
+       "      <td>10.3</td>\n",
+       "      <td>122391.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>29</th>\n",
+       "      <td>10.5</td>\n",
+       "      <td>121872.0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "    YearsExperience    Salary\n",
+       "25              9.0  105582.0\n",
+       "26              9.5  116969.0\n",
+       "27              9.6  112635.0\n",
+       "28             10.3  122391.0\n",
+       "29             10.5  121872.0"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.tail()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "133218ce-bbea-4092-a183-3e21327c3c0d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>YearsExperience</th>\n",
+       "      <th>Salary</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>1.1</td>\n",
+       "      <td>39343.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>1.3</td>\n",
+       "      <td>46205.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>1.5</td>\n",
+       "      <td>37731.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>2.0</td>\n",
+       "      <td>43525.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>2.2</td>\n",
+       "      <td>39891.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>2.9</td>\n",
+       "      <td>56642.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>3.0</td>\n",
+       "      <td>60150.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7</th>\n",
+       "      <td>3.2</td>\n",
+       "      <td>54445.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>3.2</td>\n",
+       "      <td>64445.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>9</th>\n",
+       "      <td>3.7</td>\n",
+       "      <td>57189.0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   YearsExperience   Salary\n",
+       "0              1.1  39343.0\n",
+       "1              1.3  46205.0\n",
+       "2              1.5  37731.0\n",
+       "3              2.0  43525.0\n",
+       "4              2.2  39891.0\n",
+       "5              2.9  56642.0\n",
+       "6              3.0  60150.0\n",
+       "7              3.2  54445.0\n",
+       "8              3.2  64445.0\n",
+       "9              3.7  57189.0"
+      ]
+     },
+     "execution_count": 21,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.head(10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "id": "110f6f91-d98b-491c-be34-0ef5a1318f63",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'C:\\\\Users\\\\samaa'"
+      ]
+     },
+     "execution_count": 31,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import os\n",
+    "os.getcwd()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "548048cd-fe87-4874-ab23-b450e7d27959",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#numpy"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "id": "1db51aaf-0d6c-4b25-8bb7-3460c0691472",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([1., 1., 1., 1., 1.])"
+      ]
+     },
+     "execution_count": 41,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "a=np.ones(5)\n",
+    "a"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "id": "2f8eaf9a-77f4-4090-bd10-c9f1532e9b32",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "numpy.ndarray"
+      ]
+     },
+     "execution_count": 43,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "type(a)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "id": "94df5e7d-ad46-4750-9ab5-0c56d1efa9fc",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "numpy.float64"
+      ]
+     },
+     "execution_count": 45,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "type(a[1])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 59,
+   "id": "490ada4b-98c7-4753-b677-c46633e3ac2e",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])"
+      ]
+     },
+     "execution_count": 59,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "z=np.ones(10)\n",
+    "z"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 61,
+   "id": "e4561bf9-49f3-43ef-b73d-d8772f40e326",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(10,)"
+      ]
+     },
+     "execution_count": 61,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "z.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 83,
+   "id": "26a48317-b09b-4db7-b4a1-2d53d8cbefc0",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[1.],\n",
+       "       [1.],\n",
+       "       [1.],\n",
+       "       [1.],\n",
+       "       [1.],\n",
+       "       [1.],\n",
+       "       [1.],\n",
+       "       [1.],\n",
+       "       [1.],\n",
+       "       [1.]])"
+      ]
+     },
+     "execution_count": 83,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "z.shape=(10,1)\n",
+    "z"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 89,
+   "id": "855c20d0-6cc7-4bad-8e9a-293d0b2a0b01",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])"
+      ]
+     },
+     "execution_count": 89,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "z=np.ones(10)\n",
+    "type(z[0])\n",
+    "z"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 103,
+   "id": "02862a9d-05d7-4cab-8f73-d912f27b877d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([0.])"
+      ]
+     },
+     "execution_count": 103,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "z=np.empty(1)\n",
+    "z"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 119,
+   "id": "ebdb4bcf-4fce-4c48-b889-a2322f0a2881",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([5.        , 4.42857143, 3.85714286, 3.28571429, 2.71428571,\n",
+       "       2.14285714, 1.57142857, 1.        ])"
+      ]
+     },
+     "execution_count": 119,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "z=np.linspace(5,1,8)\n",
+    "z"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 121,
+   "id": "865c3074-3d3e-4825-aca0-a773d80e161c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([9, 8])"
+      ]
+     },
+     "execution_count": 121,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "z=np.array([9,8])\n",
+    "z"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "66af5c9f-7e6c-4ad2-bf54-78e24cb34fa7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#matplotlib"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "e4efc5da-d287-431b-bee2-eff841bc9808",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [conda env:base] *",
+   "language": "python",
+   "name": "conda-base-py"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
