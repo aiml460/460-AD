@@ -1,0 +1,165 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMzjKof8rISjKFT1QOT2iBW",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/aiml460/460-AD/blob/main/Day2_assignment\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "XJArUhI22RWS",
+        "outputId": "27cea25f-c8a8-47d2-8613-970a354a610c"
+      },
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[10, 20, 30, 40, 50]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 1
+        }
+      ],
+      "source": [
+        "my_list = [10, 20, 30, 40, 50]\n",
+        "my_list\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "my_tuple = (1, 2, 3, 4, 5)\n",
+        "my_tuple\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "UlkwHoYc2Y2X",
+        "outputId": "5f106620-c2a9-4a63-8610-ceb1306523e9"
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "(1, 2, 3, 4, 5)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 2
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "my_dict = {\"a\": \"apple\", \"b\": \"banana\", \"c\": \"cherry\", \"d\": \"date\", \"e\": \"elderberry\"}\n",
+        "my_dict"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "91RIL0Hr2pMb",
+        "outputId": "4351f773-e344-44ee-eacc-1803c78f573f"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "{'a': 'apple', 'b': 'banana', 'c': 'cherry', 'd': 'date', 'e': 'elderberry'}"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 3
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"First element in List:\", my_list[0])\n",
+        "print(\"Third element in List:\", my_list[2])\n",
+        "print(\"Last element in List:\", my_list[-1])\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "9EmpHcru2-vm",
+        "outputId": "2fc596ca-12d5-4539-8111-53a9450d4c02"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "First element in List: 10\n",
+            "Third element in List: 30\n",
+            "Last element in List: 50\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Value of key 'a':\", my_dict[\"a\"])\n",
+        "print(\"Value of key 'c':\", my_dict[\"c\"])\n",
+        "print(\"Value of key 'e':\", my_dict[\"e\"])\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "wDOTWIJ03ap9",
+        "outputId": "725fb24a-1f67-4261-e296-b0335eb8dd38"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Value of key 'a': apple\n",
+            "Value of key 'c': cherry\n",
+            "Value of key 'e': elderberry\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
